@@ -5,7 +5,7 @@ import { useEvmSearchNFTs } from '@moralisweb3/next'
 import { EvmChain } from 'moralis/common-evm-utils'
 import { NftCardContainer } from '@/components/nft/CardContainer'
 
-const NftExplore = ({ setTheme }: { setTheme: () => void }) => {
+const NftExplore = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [preSearchQuery, setPreSearchQuery] = useState('')
   const [searchTrigger, setSearchTrigger] = useState(0)
@@ -19,9 +19,10 @@ const NftExplore = ({ setTheme }: { setTheme: () => void }) => {
   useEffect(() => {
     if (preSearchQuery.length <= 3) return
     setSearchQuery(preSearchQuery)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTrigger])
 
-  const { data, error, isFetching } = useEvmSearchNFTs({
+  const { data, isFetching } = useEvmSearchNFTs({
     q: searchQuery || 'bored',
     chain: chain,
     filter: 'name',
@@ -33,7 +34,6 @@ const NftExplore = ({ setTheme }: { setTheme: () => void }) => {
   }
 
   const searchResult = useMemo(() => {
-    console.log(1111,data)
     return data?.map((d) => d.token) || []
   }, [data])
 
