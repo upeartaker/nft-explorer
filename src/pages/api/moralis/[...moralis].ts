@@ -1,3 +1,10 @@
-import { MoralisNextApi } from "@moralisweb3/next";
+import { MoralisNextApi } from '@moralisweb3/next'
 
-export default MoralisNextApi({ apiKey: process.env.MORALIS_APP_KEY as string });
+export default MoralisNextApi({
+  apiKey: process.env.MORALIS_APP_KEY as string,
+  authentication: {
+    domain: 'amazing.dapp',
+    uri: process.env.NEXTAUTH_URL as string,
+    timeout: 120,
+  },
+})
